@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //var는 한번 선언된 변수를 다시 선언할 수 있다.
+        var name = 'Mike';
+        console.log(name); //Mike
+
+        var name = "Jane";
+        console.log(name); //Jane
+
+
+        let name = 'Mike';
+        console.log(name); //Mike
+
+        /*
+        let name = 'Jane'; //error!
+        console.log(name);
+        */
+
+
+
+        //var는 선언하기 전에 사용할 수 있다.
+        //코드가 실제로 이동하지는 않지만 최상위로 끌어 올려진 것처럼 동작
+        //-> 호이스팅(hoisting): 스코프 내부 어디서든 변수 선언은 최상위에 선언된 것처럼 행동
+        //선언은 호이스팅되지만 할당은 호이스팅되지 않는다.
+        console.log(name); //undefined
+        var name = 'Mike';
+
+
+        /*
+        console.log(name); //ReferenceError
+        let name = 'Mike';
+        */
+
+        //let과 const도 호이스팅된다.
+        //하지만, 에러가 발생하는 이유는 Temporal Dead Zone 때문이다.
+        /*
+        console.log(name) //Temporal Dead Zone
+        const name = "Mike" //함수 선언 및 할당
+        console.log(name) //사용 가능
+        */
+
+
+
+        /*
+        변수의 생성과정
+        1. 선언 단계
+        2. 초기화 단계
+        3. 할당 단계
+
+        var
+        1. 선언 및 초기화 단계(초기화: undefined를 할당 해주는 단계)
+        2. 할당 단계
+
+        let
+        1. 선언 단계
+        2. 초기화 단계
+        3. 할당 단계
+
+        const
+        1. 선언 + 초기화 + 할당
+
+
+
+        스코프
+        var
+        : 함수 스코프(function-scoped)
+        -> 함수 내에서 선언된 변수만 그 지역 변수가 됨
+        
+        let, const
+        : 블록 스코프(block-scoped)
+        -> 모든 코드 블록에서 선언된 변수는 코드 블록 내에서만 유효하며 외부에서는 접근할 수 없다.
+        -> 함수, if문, for문, while문, try/catch문 등
+        */
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
