@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //Computed property
+        let a = 'age';
+
+        const user = {
+            name : 'Mike',
+            age : 30
+        }
+
+
+        let a = 'age';
+
+        const user = {
+            name : 'Mike',
+            [a] : 30 //age : 30
+        }
+        //대괄호로 묶어주면 a라는 문자열이 아니라 변수 a에 할당된 값이 들어감
+        //-> computed property(계산된 프로퍼티)
+
+
+        const user = {
+            [1 + 4] : 5,
+            ["안녕" + "하세요"] : "Hello"
+        }
+        //식 자체를 넣는 것도 가능함
+
+
+        function makeObj(key, val) {
+            return {
+                [key] : val,
+            };
+        }
+
+        const obj = makeObj("나이", 33);
+
+        console.log(obj);
+
+
+
+        //Object.assign(): 객체 복제
+        const user = {
+            name : 'Mike',
+            age : 30
+        }
+
+        const cloneUser = user; //X
+        const newUser = Object.assign({}, user);
+
+
+        const user = {
+            name : 'Mike'
+        }
+        const info1 = {
+            age : 30
+        }
+        const info2 = {
+            gender : 'male'
+        }
+
+        Object.assign(user, info1, info2)
+
+
+
+        //Object.keys(): 키 배열 반환
+        const user = {
+            name : 'Mike',
+            age : 30,
+            gender : 'male',
+        }
+
+        Object.keys(user); //["name", "age", "gender"]
+
+
+
+        //Object.values(): 값 배열 반환
+        const user = {
+            name : 'Mike',
+            age : 30,
+            gender : 'male',
+        }
+
+        Object.values(user); //["Mike", 30, "male"]
+
+
+
+        //Object.entries(): 키/값 배열 반환
+        const user = {
+            name : 'Mike',
+            age : 30,
+            gender : 'male',
+        }
+
+        Object.entries(user);
+        /*
+        [
+            ["name", "Mike"],
+            ["age", 30],
+            ["gender", "male"]
+        ]
+        */
+
+
+
+        //Object.fromEntries(): 키/값 배열을 객체로
+        const arr = 
+        [
+            ["name", "Mike"],
+            ["age", 30],
+            ["gender", "male"]
+        ];
+
+        Object.fromEntries(arr);
+        /*
+        {
+            name : 'Mike',
+            age : 30,
+            gender : 'male',
+        }
+        */
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
