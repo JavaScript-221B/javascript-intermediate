@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const user = {
+            name : 'Mike'
+        }
+
+        user.name //"Mike"
+        user.hasOwnProperty('name') //true
+        user.hasOwnProperty('age') //false
+
+        const user = {
+            name : 'Mike',
+            hasOwnProperty : function() {
+                console.log('haha')
+            }
+        }
+
+        user.hasOwnProperty() //haha
+
+
+
+        const car = {
+            wheels: 4,
+            drive() {
+                console.log("drive..");
+            },
+        }
+
+        const bmw = {
+            color: "red",
+        };
+
+        const benz = {
+            color: "black",
+        }
+
+        const audi = {
+            color: "blue",
+        }
+
+        bmw.__proto__ = car;
+        benz.__proto__ = car;
+        audi.__proto__ = car;
+
+        const x5 = {
+            color: 'white',
+            name: 'x5',
+        }
+
+        x5.__proto__ = bmw;
+        //Prototype Chain
+
+
+        for (p in x5) {
+            if (x5.hasOwnProperty(p)) {
+                console.log('o', p);
+            } else {
+                console.log('x', p);
+            }
+        }
+
+
+
+        /*
+        const car = {
+            wheels: 4,
+            drive() {
+                console.log("drive..");
+            },
+        }
+        */
+
+        const Bmw = function(color) {
+            this.color = color;
+        };
+
+        /*
+        Bmw.prototype.wheels = 4;
+        Bmw.prototype.drive = function() {
+            console.log("drive..");
+        }
+        Bmw.prototype.navigation = 1;
+        Bmw.prototype.stop = function() {
+            console.log("STOP!");
+        };
+        */
+
+        Bmw.prototype = { //이렇게 하면 constructor가 사라짐
+            constructor: Bmw,
+            wheels: 4,
+            drive() {
+                console.log("drive..");
+            },
+            navigation: 1,
+            stop() {
+                console.log("STOP!");
+            },
+        }
+
+        const x5 = new Bmw("red");
+        const z4 = new Bmw("blue");
+
+        /*
+        x5.__proto__ = car;
+        z4.__proto__ = car;
+        */
+
+        z4 instanceof Bmw //true
+        z4.constructor === Bmw; //true
+
+
+
+        const Bmw = function(color) { //초기에 세팅한 컬러를 얻을 수만 있고, 바꿀 수는 없음
+            const c = color;
+            this.getColor = function() {
+                console.log(c);
+            };
+        };
+
+        const x5 = new Bmw("red");
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
