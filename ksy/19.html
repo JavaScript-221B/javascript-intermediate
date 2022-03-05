@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //ES2021
+        //String.replaceAll
+        const str1 = "Hello World";
+        console.log(str1.replaceAll("l", "~"));
+        console.log(str1.replace(/l/g, "~"));
+
+        const str1 = "I'm [Mike]. This is Tom's [Car].";
+        console.log(str1.replaceAll("[", "~").replaceAll("]", "~"));
+        console.log(str1.replace(/\[/g, "~").replace(/\]/g, "~"));
+
+
+
+        //Promise.any
+        const resPromise = new Promise((res, rej) => {
+            setTimeout(() => {
+                rej("fail..")
+            }, 1000)
+        })
+        const resPromise = new Promise((res, rej) => {
+            setTimeout(() => {
+                res("success")
+            }, 2000)
+        })
+
+        //Promise.race: 프로미스 중에 가장 먼저 완료된 결과값으로 이행/거부
+        Promise.race([rejPromise, resPromise])
+            .then(() => console.log("성공"))
+            .catch((e) => console.log(e));
+        
+        //Promise.any: 프로미스 중에 가장 먼저 이행된 객체 반환
+        //-> 모든 프로미스가 거부되면 모든 프로미스가 거부되었다는 메시지를 보여줌
+        Promise.any([rejPromise, resPromise])
+            .then(() => console.log("성공"))
+            .catch((e) => console.log(e));
+        
+
+
+        //Logical Assignment Operators
+        function add(num1, num2) {
+            console.log(num1 + num2);
+        }
+
+        add(); //NaN
+
+
+        function add(num1, num2) {
+            num1 = num1 || 0;
+            num2 ||= 0;
+            console.log(num1 + num2);
+        }
+
+        add(); //0
+
+
+        //Nullish coalescing operator: null 병합 연산자
+        //-> ||: 앞의 값이 falsy이면 뒤의 값
+        //-> ??: 앞의 값이 null이나 undefined이면 뒤의 값
+        name = name ?? "Mike"
+        name ??= "Mike"
+
+
+
+        //Numeric separators
+        let billion = 1000000000 //10억
+        let billion = 1_000_000_000
+
+
+
+        //WeakRef = weak reference
+        //약한 참조 = 가비지 컬렉터 대상
+        let user = {name: 'Mike', age: 30}
+        const weakUser = new WeakRef(user);
+
+        const timer = setInterval(() => {
+            const wUser = weakUser.deref(); //deref() -> 참조에 접근하기 위해 사용
+            
+            user = null;
+            
+            if (wUser) {
+                console.log(wUser.name);
+            } else {
+                console.log('제거 되었습니다.');
+                clearInterval(timer)
+            }
+        }, 1000)
+
+
+        //특정 객체를 일정 시간만 캐시하도록 하는 방법으로도 사용할 수 있음
+        class MyCache {
+            constructor() {
+                this.cache = {}
+            }
+
+            add(key, obj) {
+                this.cache[key] = new WeakRef(obj)
+                /*
+                this.cache[key] = obj (강한 참조)
+                -> 전달해준 객체가 사라진다해도 즉, 가비지가 된다고 하더라도
+                    가비지 컬렉터는 cache[key]를 가비지로 인식하지 못함
+                */
+            }
+
+            get(key) {
+                let cachedRef = this.cache[key].deref()
+                if (cachedRef) {
+                    return cachedRef
+                } else {
+                    return false;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
