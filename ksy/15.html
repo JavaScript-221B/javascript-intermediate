@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //Class
+        //-> ES6에 추가된 스펙
+        const User = function(name, age) {
+            this.name = name;
+            this.age = age;
+            // this.showName = function() {
+            //     console.log(this.name);
+            // };
+        };
+
+        User.prototype.showName = function() {
+            console.log(this.name);
+        };
+
+        const mike = User("Mike", 30)
+        console.log(mike); //undefined -> User에 리턴문이 없으므로
+        const mike = new User("Mike", 30);
+
+
+        class User2 {
+            constructor(name, age) {
+                this.name = name;
+                this.age = age;
+            }
+            showName() {
+                console.log(this.name)
+            }
+        }
+
+        const tom = User2("Tom", 19);
+        console.log(tom); //error 발생
+        const tom = new User2("Tom", 19);
+
+
+
+        //Class - 상속
+        //extends
+        class Car {
+            constructor(color) {
+                this.color = color;
+                this.wheels = 4;
+            }
+            drive() {
+                console.log("drive..");
+            }
+            stop() {
+                console.log("STOP!");
+            }
+        }
+
+        class Bmw extends Car {
+            park() {
+                console.log("PARK");
+            }
+        }
+
+        const z4 = new Bmw("blue");
+
+
+
+        //Class - 메서드 오버라이딩(method overriding)
+        class Car {
+            constructor(color) { //()
+                this.color = color;
+                this.wheels = 4;
+            }
+            drive() {
+                console.log("drive..");
+            }
+            stop() {
+                console.log("STOP!");
+            }
+        }
+
+        class Bmw extends Car {
+            /* constructor가 없으면 이렇게 있는 것처럼 행동
+            constructor(...args) {
+                super(...args)
+            }
+            */
+            constructor(color) {
+                super(color); //항상 부모 클래스의 cunstructor를 실행해줘야 함
+                this.navigation = 1;
+            }
+            park() {
+                console.log("PARK");
+            }
+            stop() {
+                //super.stop(); -> 부모 클래스에 정의된 메서드 사용하기
+                console.log("OFF")
+            }
+        }
+
+        const z4 = new Bmw("blue");
+        z4.stop(); //OFF -> 덮어 씌우기 됨
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
