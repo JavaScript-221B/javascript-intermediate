@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //setTimeout -> 일정 시간이 지난 후 함수를 실행
+        setTimeout(function() {
+            console.log(3)
+        }, 3000);
+
+
+        function showName(name) {
+            console.log(name);
+        }
+
+        setTimeout(showName, 3000, 'Mike');
+
+
+
+        //clearTimeout(tId); -> 예정된 작업을 없앰
+        function showName(name) {
+            console.log(name);
+        }
+
+        const tId = setTimeout(showName, 3000, 'Mike');
+
+        clearTimeout(tId);
+
+
+
+        //setInterval -> 일정 시간 간격으로 함수를 반복
+        function showName(name) {
+            console.log(name);
+        }
+
+        const tId = setInterval(showName, 3000, 'Mike');
+
+
+        //주의
+        setTimeout(function() {
+            console.log(2) //2
+        }, 0); //delay time을 0으로 줘도 실제로 바로 실행되지는 않음
+
+        console.log(1); //1
+        //1번이 먼저 수행되고 2번이 수행됨
+        //-> 현재 실행중인 스크립트가 종료된 이후 스케줄링 함수가 실행되기 때문
+        //-> 브라우저는 기본적으로 4ms 정도의 대기 시간이 있음
+
+
+
+        //clearInterval(tId);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //Generator
+        //-> 함수의 실행을 중간에 멈췄다가 재개할 수 있는 기능
+        //-> next(), return(), throw()
+        function* fn() {
+            try {
+                console.log(1);
+                yield 1;
+                console.log(2);
+                yield 2;
+                console.log(3);
+                console.log(4);
+                yield 3;
+                return "finish";
+            } catch (e) {
+                console.log(e);
+            }
+        }
+
+        const a = fn();
+
+        a.next(); //가장 가까운 yield문을 만날 때까지 실행되고, 데이터 객체를 반환
+        //1
+        //{value: 1, done: false}
+
+
+        /*
+        Generator
+
+        iterable
+        - Symbol.iterator 메서드가 있다.
+        - Symbol.iterator는 iterator를 반환해야 한다.
+
+        iterator
+        - next 메서드를 가진다.
+        - next 메서드는 value와 done 속성을 가진 객체를 반환한다.
+        - 작업이 끝나면 done은 true가 된다.
+        */
+
+        function* fn() {
+            yield 4;
+            yield 5;
+            yield 6;
+        }
+
+        const a = fn();
+
+        a[Symbol.iterator]() === a; //true
+
+
+
+        //Generator - next()에 인수 전달
+        function* fn() {
+            const num1 = yield "첫번째 숫자를 입력해주세요";
+            console.log(num1);
+
+            const num2 = yield "두번째 숫자를 입력해주세요";
+            console.log(num2);
+
+            return num1 + num2;
+        }
+
+        const a = fn();
+
+
+
+        //Generator - 값을 미리 만들어 두지 않음
+        function* fn() {
+            let index = 0;
+            while (true) {
+                yield index++;
+            }
+        }
+
+        const a = fn();
+
+
+
+        //Generator - yield*을 이용
+        function* gen1() {
+            yield "w";
+            yield "o";
+            yield "r";
+            yield "l";
+            yield "d";
+        }
+
+        function* gen2() {
+            yield "Hello,";
+            yield* gen1();
+            yield "!";
+        }
+
+        console.log(...gen2()); //Hello, W o r l d !
+
+
+
+        /*
+        Generator
+        - 제너레이터는 다른 작업을 하다가 돌아와서 next() 해주면 진행이 멈췄던 부분 부터 이어서 실행
+
+        ex) Redux Saga
+        */
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
